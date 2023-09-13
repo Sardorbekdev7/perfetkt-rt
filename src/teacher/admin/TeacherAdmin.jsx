@@ -8,11 +8,11 @@ import { Layout, Menu, Button, theme } from 'antd';
 import {Link, Route, Routes, useLocation} from 'react-router-dom';
 import HomeDash from "../components/home/HomeDash.jsx";
 import {PiChalkboardTeacher} from "react-icons/pi";
-import Teachers from "../components/teacher/Teacher.jsx";
 import Subjects from '../components/subjects/Subjects.jsx';
-import Subteacher from '../components/subteacher/subteacher.jsx';
-import News from '../components/news/News.jsx';
 import Profile from '../components/profile/Profile.jsx';
+import Books from '../components/books/Books.jsx';
+import Articles from '../components/articles/Articles.jsx';
+import Resources from '../components/resources/Resources.jsx';
 const { Header, Sider, Content } = Layout;
 
 
@@ -58,7 +58,7 @@ const TeacherAdmin = () => {
                 <FaHome />
                 <Link to="">Dashboard</Link>
             </Menu.Item>
-            <Menu.Item key="3">
+            <Menu.Item key="2">
                 <PiChalkboardTeacher />
                 <Link to="profile">Profil</Link>
             </Menu.Item>
@@ -66,15 +66,15 @@ const TeacherAdmin = () => {
                 <PiChalkboardTeacher />
                 <Link to="subjects">Fanlar</Link>
             </Menu.Item>
-            <Menu.Item key="3">
+            <Menu.Item key="4">
                 <PiChalkboardTeacher />
                 <Link to="books">Kitoblar</Link>
             </Menu.Item>
-            <Menu.Item key="3">
+            <Menu.Item key="5">
                 <PiChalkboardTeacher />
                 <Link to="articles">Maqolalar</Link>
             </Menu.Item>
-            <Menu.Item key="3">
+            <Menu.Item key="6">
                 <PiChalkboardTeacher />
                 <Link to="resources">Resurslar</Link>
             </Menu.Item>
@@ -110,6 +110,9 @@ const TeacherAdmin = () => {
            <Routes>
             <Route path={''} element={<HomeDash />} />
             <Route path={'profile'} element={<Profile />} />
+            <Route path={'books'} element={<Books />} />
+            <Route path={'articles'} element={<Articles />} />
+            <Route path={'resources'} element={<Resources />} />
             <Route path={'subjects'} element={<Subjects />} />
            </Routes>                                          
         </Content>
