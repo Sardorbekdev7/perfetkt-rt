@@ -13,6 +13,7 @@ import PresentationDetail from './companents/presentation-detail/PresentationDet
 import Login from './companents/login/Login.jsx'
 import { QueryClientProvider } from 'react-query'
 import TeacherAdmin from './teacher/admin/TeacherAdmin.jsx'
+import AdminLogin from './admin/adminlogin/AdminLogin.jsx'
 
 
 const RautePage = () => {
@@ -21,6 +22,7 @@ const RautePage = () => {
         <>
             <Routes>
             <Route path='/admin/*' element={<Admin />} />
+            <Route path='/adminlogin' element={<AdminLogin />} />
             <Route path='/my/*' element={<TeacherAdmin />} />
             <Route path='/' element={<Homepage />} />
             <Route path='/teachers' element={<Teacher />} />

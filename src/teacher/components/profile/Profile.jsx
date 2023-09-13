@@ -101,7 +101,7 @@ const Profile = () => {
                   )):""}
                 </ul>
                 <br />
-                <Input placeholder="O'quv muassasi va turini tanlang" onChange={(e) => setNameC(e.target.value)} value={nameC} />
+                <Input placeholder="O'quv muassasi va turini kiriting" onChange={(e) => setNameC(e.target.value)} value={nameC} />
                 <Input placeholder="Nomi" type='Date' onChange={(e) => setStartT(e.target.value)} value={startT} />
                 <Input placeholder="Nomi" type='Date' onChange={(e) => setEndT(e.target.value)} value={endT} />
                 <Button onClick={AddSC}>Add</Button>
@@ -114,7 +114,7 @@ const Profile = () => {
                   )):""}
                 </ul>
                 <br />
-                <Input placeholder="O'quv muassasi va turini tanlang" onChange={(e) => setNameWC(e.target.value)} value={nameWC} />
+                <Input placeholder="Ish joyi va lavozimini kiriting" onChange={(e) => setNameWC(e.target.value)} value={nameWC} />
                 <Input placeholder="Nomi" type='Date' onChange={(e) => setStartWT(e.target.value)} value={startWT} />
                 <Input placeholder="Nomi" type='Date' onChange={(e) => setEndWT(e.target.value)} value={endWT} />
                 <Button onClick={AddWC}>Add</Button>
