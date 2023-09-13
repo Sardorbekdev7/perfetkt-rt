@@ -1,4 +1,4 @@
-import { Button, Col, DatePicker, Input, Modal, Row, Select } from 'antd'
+import { Button, Col, DatePicker, Image, Input, Modal, Row, Select, Tag } from 'antd'
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { api } from '../../../helps/api';
@@ -80,6 +80,7 @@ const Books = () => {
                         <th>Yozilgan sanasi</th>
                         <th>Tili</th>
                         <th>Avtorlari</th>
+                        <th>Tags</th>
                         <th>Rasm</th>
                         <th>Yuklab olish</th>
                         <th>Tahrirlash</th>
@@ -93,6 +94,11 @@ const Books = () => {
                             <td>{item.name}</td>
                             <td>{item.description}</td>
                             <td>{item.creationDate}</td>
+                            <td>{item.language}</td>
+                            <td>{item.out_authors.map((at) => (<p>{at}</p>))}</td>
+                            <td>{item.tags.map((at) => (<Tag>{at}</Tag>))}</td>
+                            <td><Image src={`${item.preview_pic}`} /></td>
+                            <td><a href={`${item.link}`} target="_blank" rel="noopener noreferrer"></a></td>
                             <td><Button>Tahrirlash</Button></td>
                             <td><Button danger onClick={() => deleteTeacher(item._id)}>O'chirish</Button></td>
                         </tr>
