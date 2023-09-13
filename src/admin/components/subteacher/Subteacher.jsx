@@ -43,18 +43,18 @@ const Subteacher = ()=>{
         getTeachers();
     },[])
     return(
-        <>
-            <h1>O'qituvchini tanlang</h1>
+        <div style={{gap: '10px'}}>
+            <h1 style={{marginBottom: '10px'}}>O'qituvchini tanlang</h1>
             <Select
                     allowClear
                     style={{
-                        width: '100%',
+                        width: '100%',marginBottom: '10px'
                     }}
                     placeholder="O'qituvchilarni tanlang"
                     options={teachers}
                     onChange={(val)=>{setTeacher(val);}}
                     />
-            <Button type="primary" onClick={() => {setProfile(null);getTeacherInfo(teacher);}} >Ma'lumot</Button>
+            <Button  type="primary" onClick={() => {setProfile(null);getTeacherInfo(teacher);}} style={{marginBottom: '10px'}} >Ma'lumot</Button>
             {profile?
             <div>
                 <h2>{profile.full_name} - Umumiy ma'lumotlar</h2>
@@ -68,7 +68,7 @@ const Subteacher = ()=>{
                 </div>
             </div>
             :<p>Ma'lumot yuklanmoqda</p>}
-        </>
+        </div>
     )
 }
 export default Subteacher

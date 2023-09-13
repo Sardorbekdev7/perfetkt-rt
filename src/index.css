@@ -38,3 +38,21 @@ th, td {
 .ant-drawer  {
   z-index: 1222121212 !important;
 }
+
+
+
+.ant-menu-title-content svg {
+  width: 30px;
+  height: 30px;
+  position: relative;
+  top: 7px;
+  margin-right: 7px;
+}
+
+.ant-layout-sider-collapsed a {
+  margin-left: 10px;
+}
+
+.ant-layout-sider-collapsed svg {
+  left: -5px;
+}

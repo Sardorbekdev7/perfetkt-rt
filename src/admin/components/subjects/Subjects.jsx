@@ -28,6 +28,7 @@ const Subjects = () => {
     const [selectedSubject,setselectedSubject] = useState("")
     const [openTheme, setOpenTheme] = useState(false);
     const token = cookies.get('token')
+
     const postSubject = () => {
         axios.post(`${api}/admin/add-subject`, {
             subject_name: name,
@@ -41,6 +42,7 @@ const Subjects = () => {
             getSubjects()
         })
     }
+
     const postSubjectTheme = () => {
         axios.post(`${api}/admin/add-theme`, {
             name: themeName,
@@ -54,6 +56,7 @@ const Subjects = () => {
             getSubjects()
         })
     }
+    
     const getTeachers = () =>{
         axios.get(`${api}/admin/home`,{
             headers: {
