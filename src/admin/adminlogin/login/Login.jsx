@@ -1,18 +1,18 @@
 import axios from 'axios'
 import './style/style.css'
-import { api } from '../../helps/api'
 import Cookies from 'universal-cookie'
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { api } from '../../../helps/api'
 
-const Login = () => {
+const AdminLogin = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
 
   const cookies = new Cookies()
 
   const LoginAdmin = () => {
-    axios.post(`${api}/auth/signin`, {username, password}).then((res) => {
+    axios.post(`${api}/auth/signin/admin`, {username, password}).then((res) => {
       cookies.set('token', res.data.token)
       console.log(res);
     })
@@ -36,7 +36,7 @@ const Login = () => {
       </div>
       <div className='login-button'>
         <button onClick={LoginAdmin}>
-          <Link to={'/my'}>
+          <Link to={'/admin'}>
             Kirish
           </Link>
         </button>
@@ -45,4 +45,4 @@ const Login = () => {
   )
 }
 
-export default Login;
+export default AdminLogin;
