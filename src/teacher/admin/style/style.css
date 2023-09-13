@@ -1,0 +1,7 @@
+.admin {
+    width: 100%;
+    height: auto;
+    display: flex;
+    word-wrap: break-word;
+    position: relative;
+}

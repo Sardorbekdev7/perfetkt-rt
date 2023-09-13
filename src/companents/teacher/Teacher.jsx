@@ -27,7 +27,7 @@ const Teacher = () => {
         <Row>
           {teachers?
           teachers.map((item,key)=>(
-            item.profile_pic?<Col lg={6} md={12} sm={24} xs={24} >
+            item.isActive?<Col key={key} lg={6} md={12} sm={24} xs={24} >
             <div className='teacher-card'>
               <div className='teacher-img'>
                 <img src={item.profile_pic} alt='teacher' />
@@ -48,7 +48,7 @@ const Teacher = () => {
                 </div>
               </div>
             </div>
-          </Col>:<></>
+          </Col>:<div key={key}></div>
           )):<>Iltimos kuting...</>}
         </Row>
       </div>
