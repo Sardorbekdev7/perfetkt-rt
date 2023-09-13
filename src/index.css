@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap');
+
+*{
+  box-sizing: border-box;
+  margin: 0; 
+  padding: 0;
+  font-size: roboto;
+  font-family: 'Roboto Condensed', sans-serif;
+}
+
+body {
+  margin: 0; 
+  padding: 0;
+  box-sizing: border-box;
+}
+
+a{
+  text-decoration: none !important;
+}
+
+th, td {
+  border: gray 1px solid;
+  margin: 0;
+}
+
+.container {
+  position: relative;
+  max-width: 1550px;
+  margin:  0 auto;
+  overflow: hidden;
+}
+
+
+.react-multi-carousel-list {
+  overflow: visible !important;
+}
+
+.ant-drawer  {
+  z-index: 1222121212 !important;
+}

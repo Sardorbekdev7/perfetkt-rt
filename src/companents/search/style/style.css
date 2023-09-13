@@ -1,0 +1,30 @@
+.search {
+    display: flex;
+    margin-top: 20px;
+}
+
+.search input {
+    width: 100%;
+    border-radius: 5px 0 0 5px;
+    height: 30px;
+    outline: none;
+    padding: 0 10px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.search-filter {
+    position: relative;
+    display: flex;
+    /* left: -60px; */
+    gap: 10px;
+    background-color: gray;
+    width: 70px;
+    height: 30px;
+    border-radius: 0 5px 5px 0; 
+    padding: 5px;
+}
+
+.search-filter img {
+    width: 100%;
+    cursor: pointer;
+}

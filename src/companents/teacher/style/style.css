@@ -1,0 +1,141 @@
+.teachers {
+    display: flex;
+    position: relative;
+    padding: 20px 120px;
+    margin-top: 80px;
+    flex-direction: column;
+}
+
+.teachers:before {
+    content: ' ';
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    opacity: 0.2;
+    background-image: url('../../../assets/homepage/brand1.svg');
+    background-repeat: no-repeat;
+    background-position: 50% 0;
+    background-size: contain;
+}
+
+.teachers h1 {
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.teacher-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    border-radius: 10px;
+    background: #FFF;
+    border: 1px solid #005C47;
+    box-shadow: 0px 0px 7px 0px rgba(0, 0, 0, 0.50);
+    margin: 10px;
+}
+
+.teacher-card:hover {
+    background: linear-gradient(135deg, #00803D 0%, #005C47 100%);
+}
+
+.teacher-card:hover .teacher-info h3 {
+    color: #FFF;
+}
+
+.teacher-card:hover .teacher-info p {
+    color: #FFF;
+}
+
+.teacher-card:hover .teacher-info a {
+    color: #FFF;
+}
+
+
+.teacher-card:hover .teacher-info span {
+    color: #FFF;
+}
+
+.teacher-img {
+    width: 200px;
+    height: 200px;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 27px;
+}
+
+.teacher-img img {
+    width: 100%;
+    height: 100%;
+}
+
+
+.teacher-info h3 {
+    color: #005C47;
+    text-align: center;
+    font-family: Playfair Display;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.teacher-info p {
+    color: rgba(0, 92, 71, 0.60);
+    text-align: center;
+    font-family: Quicksand;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    margin-top: 11px;
+    margin-bottom: 20px;
+}
+
+.teacher-info span, .teacher-info a {
+    color: #005C47;
+    font-family: Quicksand;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.teacher-about {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+
+.teacher-about a {
+    color: #FFF;
+    border-radius: 10px;
+    background: #005C47;
+    width: 80px;
+    height: 30px;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    margin-top: 10px;
+}
+
+
+@media (max-width: 768px) {
+    .teachers {
+        padding: 20px 50px;
+    }
+}
+
+@media (max-width: 428px) {
+    .teachers {
+        padding:20px 20px;
+    }
+}

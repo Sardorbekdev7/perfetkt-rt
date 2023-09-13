@@ -1,0 +1,25 @@
+.footer {
+    width: 100%;
+    background: linear-gradient(135deg, #00803D 0%, #005C47 100%);
+    padding: 5px 120px;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+.footer h1 {
+    color: white;
+    font-size: 14px;
+}
+
+@media (max-width: 768px) {
+    .footer {
+        padding: 5px 50px;
+    }
+}
+
+@media (max-width: 428px) {
+    .footer {
+        padding: 5px 20px;
+    }
+}

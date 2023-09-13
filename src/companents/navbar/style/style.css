@@ -1,0 +1,167 @@
+.navbar {
+    position: fixed;
+    z-index: 120204;
+    top: 0;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    height: 80px;
+    padding: 5px;
+    align-items: center;
+    background: linear-gradient(135deg, #00803D 0%, #005C47 100%);
+    text-align: center;
+    padding: 5px 120px;
+}
+
+.navbar-brand {
+    width: 50%;
+    height: 100%;
+}
+
+.navbar-brand a{
+    height: 100%;
+    display: flex;
+    align-items: center;
+    color: white;
+    font-family: "Roboto Condensed", sans-serif;
+}
+
+.navbar-name {
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    
+}
+
+.navbar-name a {
+    font-size: 16px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.6) !important;
+    transition: 0.3s;
+    padding-bottom: 3px;
+    position: relative;
+}
+
+.navbar-name a:hover {
+    color: rgba(255, 255, 255, 1)!important;
+    animation-duration: 2s;
+}
+
+.navbar-name a::after{
+    content: "";
+    position: absolute;
+    width: 0px;
+    height: 2px;
+    left: 50%;
+    bottom:0;
+    background-color: white;
+    transition: all ease-in-out .2s;
+}
+
+.navbar-name a:hover::after{
+    width: 100%;
+    left: 0;
+}
+
+
+.navbar-brand img {
+    height: 100%;
+    margin-right: 10px;
+}
+
+.navbar-brand h1 {
+    font-size: 23px;
+    opacity: 0.8;
+}
+
+.navbar-brand h2 {
+    font-size: 20px;
+    opacity: 0.8;
+}
+
+/* @keyframes ahover {
+    0% {
+        color: rgba(255, 255, 255, 0.6)!important;
+        border-bottom: 2px solid #f85a40;
+    }
+    100% {
+        color: rgba(255, 255, 255, 1)!important;
+        border-bottom: 2px solid #f85a40;
+    }
+} */
+
+.navbar-drawer-name {
+    display: flex;
+    flex-direction: column;
+    background-color: #00803D;
+
+}
+
+.navbar-drawer-name a {
+    font-size: 20px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.6) !important;
+    transition: 0.3s;
+    padding-bottom: 10px;
+    position: relative;
+}
+
+.navbar-drawer-name a:hover {
+    color: rgba(255, 255, 255, 1)!important;
+    animation-duration: 2s;
+}
+
+.navbar-drawer-name a::after{
+    content: "";
+    position: absolute;
+    width: 0px;
+    height: 2px;
+    left: 50%;
+    bottom:0;
+    background-color: white;
+    transition: all ease-in-out .2s;
+}
+
+.navbar-drawer-name a:hover::after{
+    width: 100%;
+    left: 0;
+}
+
+
+@media (max-width: 768px) {
+    .navbar {
+        padding: 5px 50px;
+    }
+    .navbar-brand{
+        width: 100%;
+    }
+    .navbar-brand h1 {
+        font-size: 20px;
+    }
+    
+    .navbar-brand h2 {
+        font-size: 15px;
+    }
+}
+
+
+@media (max-width: 428px) {
+    .navbar {
+        padding: 5px 25px;
+    }
+    .navbar-brand{
+        width: 90% !important;
+    }
+    .navbar-brand h1 {
+        font-size:16px;
+    }
+    
+    .navbar-brand h2 {
+        font-size: 14px;
+    }
+}
+
+
+
+
