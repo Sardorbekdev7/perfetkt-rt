@@ -1,19 +1,29 @@
 import axios from 'axios'
 import Cookies from 'universal-cookie'
 import { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { api } from '../../helps/api'
+import { message } from 'antd'
 
 const AdminLogin = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
+  const [messageApi, contextHolder] = message.useMessage();
+
+  const navigate = useNavigate();
 
   const cookies = new Cookies()
 
   const LoginAdmin = () => {
     axios.post(`${api}/auth/signin/admin`, {username, password}).then((res) => {
-      cookies.set('token', res.data.token)
-      console.log(res);
+      const  data  = res.data.token
+                if (data) {
+                    cookies.set('token', res.data.token)
+                    navigate('/my')
+                    console.log(res);
+                } 
+    }).catch((err) => {
+      message.error("Bunday foydalanuvchi topilmadi!")
     })
   }
 
@@ -31,10 +41,8 @@ const AdminLogin = () => {
         </div>
       </div>
       <div className='login-button'>
-        <button onClick={LoginAdmin}>
-          <Link to={'/admin'}>
+        <button onClick={LoginAdmin} type='submit'>
             Kirish
-          </Link>
         </button>
       </div>
     </div>

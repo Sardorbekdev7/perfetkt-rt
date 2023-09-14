@@ -3,18 +3,31 @@ import './style/style.css'
 import { api } from '../../helps/api'
 import Cookies from 'universal-cookie'
 import { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, Navigate, useNavigate } from 'react-router-dom'
+import { history } from '../history/Hispory'
+import { message } from 'antd'
+
 
 const Login = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
+  const [messageApi, contextHolder] = message.useMessage();
+
+  const navigate = useNavigate();
 
   const cookies = new Cookies()
+  console.log(history);
 
   const LoginAdmin = () => {
     axios.post(`${api}/auth/signin/`, {username, password}).then((res) => {
-      cookies.set('token', res.data.token)
-      console.log(res);
+      const  data  = res.data.token
+                if (data) {
+                    cookies.set('token', res.data.token)
+                    navigate('/my')
+                    console.log(res);
+                } 
+    }).catch((err) => {
+      message.error("Bunday foydalanuvchi topilmadi!")
     })
   }
 
@@ -24,7 +37,7 @@ const Login = () => {
   return (
     <div className='login'>
       <h1>Kirish</h1>
-      <div className='login-inputs'>
+      <form className='login-inputs'>
         <div>
           <p>Login</p>
           <input type="text" onChange={(e) => setUsername(e.target.value)} />
@@ -33,12 +46,10 @@ const Login = () => {
           <p>Password</p>
           <input type="password" onChange={(e) => setPassword(e.target.value)} />
         </div>
-      </div>
+      </form>
       <div className='login-button'>
-        <button onClick={LoginAdmin}>
-          <Link to={'/my'}>
+        <button onClick={LoginAdmin} type='button'>
             Kirish
-          </Link>
         </button>
       </div>
     </div>

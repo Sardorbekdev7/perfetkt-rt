@@ -5,7 +5,7 @@ import {
 } from '@ant-design/icons';
 import {FaHome} from 'react-icons/fa'
 import { Layout, Menu, Button, theme } from 'antd';
-import {Link, Route, Routes, useLocation} from 'react-router-dom';
+import {Link, Navigate, Route, Routes, useLocation, useNavigate} from 'react-router-dom';
 import HomeDash from "../components/home/HomeDash.jsx";
 import {PiChalkboardTeacher} from "react-icons/pi";
 import Subjects from '../components/subjects/Subjects.jsx';
@@ -13,10 +13,13 @@ import Profile from '../components/profile/Profile.jsx';
 import Books from '../components/books/Books.jsx';
 import Articles from '../components/articles/Articles.jsx';
 import Resources from '../components/resources/Resources.jsx';
+import Cookies from 'universal-cookie';
 const { Header, Sider, Content } = Layout;
 
+const cookies = new Cookies()
 
 const TeacherAdmin = () => {
+  const token = cookies.get('token');
   const [collapsed, setCollapsed] = useState(false);
   const {
     token: { colorBgContainer },
@@ -41,9 +44,9 @@ const TeacherAdmin = () => {
 
   const pathId=menuLinks[path]
 
-
-  return (
-    <Layout style={{height: '100vh'}}>
+  if (token) {
+    return (
+      <Layout style={{height: '100vh'}}>
       <Sider trigger={null} collapsible collapsed={collapsed}>
         <div className="demo-logo-vertical">
           <h1 style={{color: 'white', textAlign: 'center', margin: '15px 0'}}>Perfekt - RTK</h1>
@@ -52,8 +55,8 @@ const TeacherAdmin = () => {
           theme="dark"
           mode="inline"
           defaultSelectedKeys={[pathId]}
-
-        >
+          
+          >
             <Menu.Item key="1">
                 <FaHome />
                 <Link to="">Dashboard</Link>
@@ -86,7 +89,7 @@ const TeacherAdmin = () => {
             padding: 0,
             background: colorBgContainer,
           }}
-        >
+          >
           <Button
             type="text"
             icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
@@ -96,7 +99,7 @@ const TeacherAdmin = () => {
               width: 64,
               height: 64,
             }}
-          />
+            />
         </Header>
         <Content
           style={{
@@ -106,7 +109,7 @@ const TeacherAdmin = () => {
             background: colorBgContainer,
             overflowY: 'auto'
           }}
-        >
+          >
            <Routes>
             <Route path={''} element={<HomeDash />} />
             <Route path={'profile'} element={<Profile />} />
@@ -119,6 +122,12 @@ const TeacherAdmin = () => {
       </Layout>
     </Layout>
   );
+}
+else {
+  return (
+    <Navigate to={'/login'} replace={true} />
+  )
+}
 };
 
 export default TeacherAdmin;
