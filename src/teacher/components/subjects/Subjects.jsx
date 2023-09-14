@@ -49,11 +49,14 @@ const Subjects = () => {
             headers: {
                 "x-auth-token": token
             }
-        }).then(res=>{
-            
+        }).then((res) => {
+            message.success("Muvaffiqiyatli")
+        }).catch((err) => {
+            message.error("Xatolik")
         })
         getSubjects()
     }
+
     const addResource = ()=>{
         axios.post(`${api}/subjects/add-resource`,{
             theme_id: themeId,
@@ -66,13 +69,17 @@ const Subjects = () => {
             headers: {
                 "x-auth-token": token
             }
-        }).then(res=>{
-            console.log(res)
+        }).then((res) => {
+            message.success("Muvaffiqiyatli")
+        }).catch((err) => {
+            message.error("Xatolik")
         })
     }
+
     useEffect(()=>{
         getSubjects()
     }, [open]);
+
     return (
         <>
         <Row>
@@ -84,7 +91,7 @@ const Subjects = () => {
             placeholder="Fanni tanlang"
             options={subOptions}
             style={{
-                width: 400
+                width: "100%"
             }}
             onChange={(val)=>{
                 let [subject] = subjects.filter((e)=>e._id==val)
@@ -106,7 +113,7 @@ const Subjects = () => {
             placeholder="Fan mavzusini tanlang"
             options={themeOptions}
             style={{
-                width: 400
+                width: "100%"
             }}
             onChange={(val)=>{
                 setThemeId(val);
@@ -122,9 +129,9 @@ const Subjects = () => {
         <Row style={{
             marginTop: 30
         }}>
-            <Col>
+            <Col lg={24}>
                 <h2>Mening resurslarim</h2>
-                <table>
+                <table style={{width: '100%'}} >
                     <thead>
                         <th>№</th>
                         <th>Nomi</th>
@@ -143,7 +150,7 @@ const Subjects = () => {
                             <td>{item.subject.subject_name}</td>
                             <td>{item.subject_type}</td>
                             <td>{item.resource_type}</td>
-                            <td><Button onClick={()=>{deleteResource(item._id)}}>Delete</Button></td>
+                            <td><Button danger onClick={()=>{deleteResource(item._id)}}>Delete</Button></td>
                         </tr>
                    )):<>Resurslar mavjud emas</>}
                     </tbody>

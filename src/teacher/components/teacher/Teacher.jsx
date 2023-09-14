@@ -36,8 +36,6 @@ const Teachers = () => {
             }
         } ).then(res => {
             setTeachers(res.data.passwords)
-            console.log(res.data.passwords)
-            return res.data
         })
     }
     const postTeachers = () => {
@@ -47,9 +45,11 @@ const Teachers = () => {
               'x-auth-token-admin': `${token}`
             }
         } ).then(res => {
-            console.log(res)
-            getTeachers()
+            message.success('Muvaffaqiyatli')
+        }).catch(() => {
+            message.error('Xatolik')
         })
+        getTeachers()
     }
     const deleteTeacher = (id) => {
         axios.delete(`${api}/admin/delete-teacher/${id}`, {
@@ -57,8 +57,11 @@ const Teachers = () => {
               'x-auth-token-admin': `${token}`
             }
         }).then((res) => {
-            setTeachers(res.data.teachers)
+            message.success("Muvaffiqiyatli")
+        }).catch((err) => {
+            message.error("Xatolik")
         })
+        getTeachers()
         
     }
     const postData = () => {
@@ -68,7 +71,7 @@ const Teachers = () => {
     }
     useEffect(() => {
        getTeachers(); 
-    }, [])
+    }, [open])
     return (
         <div className="adminteacher">
             <div style={{display: 'flex', justifyContent: 'space-between', marginBottom: '20px'}} className="teachertitle">

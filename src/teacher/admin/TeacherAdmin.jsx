@@ -3,6 +3,8 @@ import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
 } from '@ant-design/icons';
+import {GiBookshelf, GiBookCover} from 'react-icons/gi'
+import {MdOutlineLaptopChromebook} from 'react-icons/md'
 import {FaHome} from 'react-icons/fa'
 import { Layout, Menu, Button, theme } from 'antd';
 import {Link, Navigate, Route, Routes, useLocation, useNavigate} from 'react-router-dom';
@@ -12,7 +14,6 @@ import Subjects from '../components/subjects/Subjects.jsx';
 import Profile from '../components/profile/Profile.jsx';
 import Books from '../components/books/Books.jsx';
 import Articles from '../components/articles/Articles.jsx';
-import Resources from '../components/resources/Resources.jsx';
 import Cookies from 'universal-cookie';
 const { Header, Sider, Content } = Layout;
 
@@ -36,7 +37,7 @@ const TeacherAdmin = () => {
     about:"8",
   }
   var location = useLocation();
-    var path=location.pathname.slice(location.pathname.indexOf('/Teacher')+7)
+    var path=location.pathname.slice(location.pathname.indexOf('/my')+7)
     if(path.length===0){
       path="default"
     }
@@ -66,15 +67,15 @@ const TeacherAdmin = () => {
                 <Link to="profile">Profil</Link>
             </Menu.Item>
             <Menu.Item key="3">
-                <PiChalkboardTeacher />
+                <GiBookshelf />
                 <Link to="subjects">Fanlar</Link>
             </Menu.Item>
             <Menu.Item key="4">
-                <PiChalkboardTeacher />
+                <GiBookCover />
                 <Link to="books">Kitoblar</Link>
             </Menu.Item>
             <Menu.Item key="5">
-                <PiChalkboardTeacher />
+                <MdOutlineLaptopChromebook />
                 <Link to="articles">Maqolalar</Link>
             </Menu.Item>
         </Menu>

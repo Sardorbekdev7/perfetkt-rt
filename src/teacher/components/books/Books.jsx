@@ -1,4 +1,4 @@
-import { Button, Col, DatePicker, Image, Input, Modal, Row, Select, Tag } from 'antd'
+import { Button, Col, DatePicker, Image, Input, Modal, Row, Select, Tag, message } from 'antd'
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { api } from '../../../helps/api';
@@ -46,7 +46,9 @@ const Books = () => {
             }
         } 
         ).then((res) => {
-            console.log(res.data);
+            message.success("Kitob muvaffiqiyatli qo'shildi")
+        }).catch((err) => {
+            message.error("Xatolik")
         })
     }
     const getAuthors = ()=>{
@@ -70,11 +72,24 @@ const Books = () => {
         })
     }
 
+    const deleteTeacher = (id) => {
+        axios.delete(`${api}/teachers/delete/${id}`,{
+            headers: {
+                "x-auth-token": token
+            }
+        }).then((res) => {
+            getBooks()
+            message.success("Kitob muvaffaqqiyatli o'chirildi")
+        }).catch(() => {
+            message.error("Xatolik")
+        })
+    }
+
 
     useEffect(() => {
         getAuthors();
         getBooks();
-    }, [])
+    }, [open])
     
 
 

@@ -1,4 +1,4 @@
-import { Button, Col, DatePicker, Image, Input, Modal, Row, Select, Tag } from 'antd'
+import { Button, Col, DatePicker, Image, Input, Modal, Row, Select, Tag, message } from 'antd'
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { api } from '../../../helps/api';
@@ -47,6 +47,7 @@ const Articles = () => {
     formData.append('type', types)
     formData.append('file',file)
     formData.append('preview_pic',preview_pic)
+
     const postArticles = () => {
         axios.post(`${api}/articles/add`, formData, {
             headers: {
@@ -56,9 +57,12 @@ const Articles = () => {
             }
         } 
         ).then((res) => {
-            console.log(res.data);
+            message.success("Maqola muvaffiqiyatli qo'shildi")
+        }).catch((err) => {
+            message.error("Xatolik")
         })
     }
+
     const getAuthors = ()=>{
         axios.get(`${api}/teachers/allIds`).then(res=>{
             console.log(res.data)
@@ -69,6 +73,7 @@ const Articles = () => {
             setOptions(options)
         })
     }
+
     const getArticles = () => {
         axios.get(`${api}/articles/me`,{
             headers: {
@@ -78,6 +83,20 @@ const Articles = () => {
           console.log(res);  
           setArticle(res.data.articles)
             
+        })
+    }
+    
+    const deleteArticles = (id) => {
+        axios.delete(`${api}/articles/delete/${id}`, {
+            headers: {
+                "x-auth-token": token,
+            }
+        }).then((res) => {
+            console.log(res);
+            getArticles()
+            message.success("Maqola muvaffiqiyatli o'chirildi")
+        }).catch(() => {
+            message.error("Xatolik")
         })
     }
 
@@ -91,11 +110,8 @@ const Articles = () => {
         getAuthors();
         getArticles();
       
-    }, [])
+    }, [open])
     
-
-
-
 
 
   return (
@@ -134,7 +150,7 @@ const Articles = () => {
                             <td><Image width={200} src={`${item.preview_pic}`} /></td>
                             <td><a href={`${item.link}`} target="_blank" rel="noopener noreferrer">Download</a></td>
                             <td><Button>Tahrirlash</Button></td>
-                            <td><Button danger onClick={() => deleteTeacher(item._id)}>O'chirish</Button></td>
+                            <td><Button danger onClick={() => deleteArticles(item._id)}>O'chirish</Button></td>
                         </tr>
                     )): <></>}
                 </tbody>
