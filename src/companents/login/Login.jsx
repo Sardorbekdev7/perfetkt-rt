@@ -4,7 +4,6 @@ import { api } from '../../helps/api'
 import Cookies from 'universal-cookie'
 import { useEffect, useState } from 'react'
 import { Link, Navigate, useNavigate } from 'react-router-dom'
-import { history } from '../history/Hispory'
 import { message } from 'antd'
 
 
@@ -16,7 +15,6 @@ const Login = () => {
   const navigate = useNavigate();
 
   const cookies = new Cookies()
-  console.log(history);
 
   const LoginAdmin = () => {
     axios.post(`${api}/auth/signin/`, {username, password}).then((res) => {
