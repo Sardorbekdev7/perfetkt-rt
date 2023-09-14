@@ -32,7 +32,7 @@ const NewsPage = () => {
     <Navbar />
     <div className='book'>
         <h1>{news.title}</h1>
-        <p>{news.createdAt.splice(0, 10)}</p>
+        {/* <p>{news.createdAt.splice(0, 10)}</p> */}
         <Document 
         file={news.body}
         onContextMenu={(e) => e.preventDefault()}
