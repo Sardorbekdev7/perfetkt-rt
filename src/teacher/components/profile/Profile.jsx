@@ -2,12 +2,17 @@ import React from 'react'
 import { useEffect, useState } from 'react';
 import { api } from '../../../helps/api';
 import axios from 'axios';
-import {Input,Col,Row,Button} from "antd"
+import {Input,Col,Row,Button,Modal,Image} from "antd"
+import Cookies from 'universal-cookie';
+const cookies = new Cookies()
 const Profile = () => {
+  const token = cookies.get('token');
   const [teacher,setTeacher] = useState({});
   const [firstName,setFirstName] = useState("")
   const [lastName,setLastName] = useState("")
   const [fatherName,setFatherName] = useState("")
+  const [email,setEmail] = useState("")
+  const [phoneNumber,setPhoneNumber] = useState("")
   const [studyCareer,setStudyCareer] = useState([])
   const [workCareer,setWorkCareer] = useState([]);
   const [nameC,setNameC] = useState("");
@@ -16,35 +21,61 @@ const Profile = () => {
   const [nameWC,setNameWC] = useState("");
   const [startWT,setStartWT]  =useState("")
   const [endWT,setEndWT]  =useState("")
+  const [openProfile,setOpenProfile] = useState(false)
+  const [openPhoto,setOpenPhoto] = useState(false)
   const formData = new FormData()
 
-  formData.append('firstName', firstName);
-  formData.append('lastName', lastName);
-  formData.append('fatherName', fatherName);
-  formData.append("full_name",`${lastName} ${firstName} ${fatherName}`)
-
   const updateProfile = ()=>{
-    axios.put(`${api}/teachers/test`,formData).then(res=>{
+    axios.put(`${api}/teachers/updateTeacher`,{
+      firstName,
+      lastName,
+      full_name: `${lastName} ${firstName} ${fatherName}`,
+      email,
+      phoneNumber
+    },{
+      headers: {
+        "x-auth-token": token
+      }
+    }).then(res=>{
       console.log(res)
     })
   }
-
   const updateCareer = ()=>{
-    axios.put(`${api}/teachers/test`,{}).then(res=>{
+    console.log(studyCareer)
+    axios.put(`${api}/teachers/update_career`,{
+      studyCareer: studyCareer,
+      workCareer
+    },{
+      headers: {
+        "x-auth-token": token
+      }
+    }).then(res=>{
       console.log(res.data)
     })
   }
-
   const getTeacher  = ()=>{
-    axios.get(`${api}/teachers/profile/a-abdusattorov`).then(res=>{
+    axios.get(`${api}/teachers/me`,{
+      headers: {
+        "x-auth-token": token
+      }
+    }).then(res=>{
       setFirstName(res.data.firstName);
       setLastName(res.data.lastName);
-      setFatherName(res.data.fatherName)
+      setFatherName(res.data.fatherName);
+      setEmail(res.data.email)
+      setPhoneNumber(res.data.phoneNumber)
       setTeacher(res.data);
-      res.data.studyCareer?setStudyCareer(res.data.studyCareer):setStudyCareer([])
+      res.data.studyCareer?setStudyCareer(res.data.studyCareer):setStudyCareer([]);
+      res.data.workCareer?setWorkCareer(res.data.workCareer):setWorkCareer([])
     })
   }
-
+  const updatePhoto = ()=>{
+    axios.put(`${api}/teachers/updatePhoto`,formData,{
+      headers: {
+        "x-auth-token": token
+      }
+    })
+  }
 
   const AddSC = ()=>{
     setStudyCareer([...studyCareer,{name: nameC,startTime: startT, endTime: endT}])
@@ -62,12 +93,41 @@ const Profile = () => {
   }
   useEffect(()=>{
     getTeacher();
-  },{})
+  },[])
 
   return (
     <div>
       <div>
-      <h2>Shaxsiy ma'lumotlarni yangilash</h2>
+        <h2>Foydalanuvchi xolati: {teacher.isActive?"Active":"Active emas"}</h2>
+        
+      <Modal
+      title="Profil rasmini tahrirlash"
+      centered
+      open={openPhoto}
+      onOk={() =>{ updatePhoto(); setOpenPhoto(false) }}
+      onCancel={() => setOpenPhoto(false)}
+      width={1000}>
+        <Row>
+        <Col g={12} md={24} sm={24} xs={24}>
+                <p>Profil rasmi</p>
+                <input type="file" name="" id="" onChange={(e) => {formData.append('profile_pic', e.target.files[0]);}} />
+        </Col>
+        </Row>
+      </Modal>
+      <div>
+       F.I.O: {teacher.full_name} - <Button onClick={()=>{setOpenProfile(true)}}>Tahrirlash</Button>
+      </div>
+      <div>
+      <Image width={200} src={teacher.profile_pic?teacher.profile_pic:"https://cdn-icons-png.flaticon.com/512/149/149071.png"}/> <br />
+      <Button onClick={()=>{setOpenPhoto(true)}}>Rasmni tahrirlash</Button>
+      </div>
+      <Modal
+       title="Ismni tahrirlash"
+       centered
+       open={openProfile}
+       onOk={() =>{ updateProfile(); setOpenProfile(false) }}
+       onCancel={() => setOpenProfile(false)}
+       width={1000}>
       <Row>
             <Col g={12} md={24} sm={24} xs={24}>
                 <p>Familyangiz:</p>
@@ -78,17 +138,19 @@ const Profile = () => {
                 <Input  placeholder="Ismingiz" onChange={(e) => setFirstName(e.target.value)} value={firstName} />
             </Col>
             <Col g={12} md={24} sm={24} xs={24}>
-                <p>Sharingiz:</p>
+                <p>Sharifingiz:</p>
                 <Input  placeholder="Otasining ismi" onChange={(e) => setFatherName(e.target.value)} value={fatherName} />
             </Col>
             <Col g={12} md={24} sm={24} xs={24}>
-                <p>Profil rasmi</p>
-                <input type="file" name="" id="" onChange={(e) => {formData.append('profile_pic', e.target.files[0]);}} />
+                <p>Sharifingiz:</p>
+                <Input  placeholder="Email kiriting..." onChange={(e) => setEmail(e.target.value)} value={email} />
             </Col>
             <Col g={12} md={24} sm={24} xs={24}>
-                <Button onClick={(e)=>{updateProfile()}} type="primary">Jo'natish</Button>
+                <p>Sharifingiz:</p>
+                <Input  placeholder="Telefon raqam" onChange={(e) => setPhoneNumber(e.target.value)} value={phoneNumber} />
             </Col>
       </Row>
+      </Modal>
       </div>
       <div>
       <h2>O'qish va ish faoliyatini yangilash</h2>

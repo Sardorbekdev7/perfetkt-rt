@@ -14,49 +14,66 @@ const Books = () => {
     const [file, setFile] = useState('')
     const [date, setDate] = useState('')
     const [book, setBook] = useState('')
-    const [out_authors,setOutAuthors]=useState([])
+    const [out_authors,setOutAuthors]=useState([]);;
+    const [options,setOptions] = useState([])
+    const [authors,setAuthors] = useState([])
     const [tags,setTags]=useState([])
     const [language,setLanguage]=useState('')
-
+    const [fileIn,setFileIn] = useState()
+    const handleChange = (e)=>{
+        if(!e.target.files){
+            return
+        }
+        setFileIn(e.target.files[0])
+    }
     const formData = new FormData()
 
     formData.append('name', name)
     formData.append('description', desc)
     formData.append('link', file)
     formData.append('language', language)
-    formData.append('tags', tags)
-    formData.append('out_authors', out_authors)
+    formData.append('tags', JSON.stringify(tags))
+    formData.append('out_authors', JSON.stringify(out_authors))
+    formData.append('authors', JSON.stringify(authors))
     formData.append('creationDate', date)
-
-    const postBooks = async () => {
-        const response = await axios.post(`${api}/books/add`, formData, {
+    formData.append('preview_pic',fileIn)
+    const postBooks = () => {
+        axios.post(`${api}/books/add`, formData, {
             headers: {
-              'x-auth-token': `${token}`
+              'x-auth-token': `${token}`,
+              'Accept': 'application/json',
+              'Content-Type': 'multipart/form-data'
             }
         } 
         ).then((res) => {
-            console.log(res);
+            console.log(res.data);
         })
     }
-
+    const getAuthors = ()=>{
+        axios.get(`${api}/teachers/allIds`).then(res=>{
+            console.log(res.data)
+            let options = []
+            res.data.teachers.map((item,key)=>{
+                options.push({label: item.full_name, value: item._id})
+            })
+            setOptions(options)
+        })
+    }
     const getBooks = () => {
-        axios.get(`${api}/books/all`).then((res) => {
+        axios.get(`${api}/books/me`,{
+            headers: {
+                "x-auth-token": token
+            }
+        }).then((res) => {
             setBook(res.data)
             console.log(res);
         })
     }
 
-    const postData = () => {
-        setOpen(false)
-        postBooks()
-        setName('')
-        setDesc('')
-        setFile('')
-        setLanguage('')
-    }
 
     useEffect(() => {
-      getBooks()
+        getAuthors();
+        getBooks();
     }, [])
     
 
@@ -95,10 +112,10 @@ const Books = () => {
                             <td>{item.description}</td>
                             <td>{item.creationDate}</td>
                             <td>{item.language}</td>
-                            <td>{item.out_authors.map((at) => (<p>{at}</p>))}</td>
+                            <td>{item.out_authors.map((at,key) => (<p>{at}</p>))}</td>
                             <td>{item.tags.map((at) => (<Tag>{at}</Tag>))}</td>
-                            <td><Image src={`${item.preview_pic}`} /></td>
-                            <td><a href={`${item.link}`} target="_blank" rel="noopener noreferrer"></a></td>
+                            <td><Image width={200} src={`${item.preview_pic}`} /></td>
+                            <td><a href={`${item.link}`} target="_blank" rel="noopener noreferrer">Download</a></td>
                             <td><Button>Tahrirlash</Button></td>
                             <td><Button danger onClick={() => deleteTeacher(item._id)}>O'chirish</Button></td>
                         </tr>
@@ -110,7 +127,7 @@ const Books = () => {
         title="Kitob qo'shish"
         centered
         open={open}
-        onOk={() => postData()}
+        onOk={() =>{  postBooks();setOpen()}}
         onCancel={() => setOpen(false)}
         width={1000}
         >
@@ -151,7 +168,20 @@ const Books = () => {
                     />
                 </Col>
                 <Col lg={12} md={24} sm={24} xs={24}>
-                    <p>Avtorlar</p>
+                    <p>Tizimda mavjud bo'lgan mualliflar</p>
+                    <Select
+                        mode="multiple"
+                        allowClear
+                        style={{
+                        width: '100%',
+                        }}
+                        placeholder="Mualliflar"
+                        onChange={(val)=>{setAuthors(val)}}
+                        options={options}
+                    />
+                </Col>
+                <Col lg={12} md={24} sm={24} xs={24}>
+                    <p>Tizimda mavjud bo'lmagan mualliflar</p>
                     <Select
                         mode="tags"
                         style={{
@@ -161,16 +191,15 @@ const Books = () => {
                         onChange={(val)=>{setOutAuthors(val)}}
                         options={[]}
                     />
-
                 </Col>
                 <Col lg={12} md={24} sm={24} xs={24}>
-                    <p>Avtorlar</p>
+                    <p>Kalit so'zlar</p>
                     <Select
                         mode="tags"
                         style={{
                         width: '100%',
                         }}
-                        placeholder="Taglar"
+                        placeholder="Kalit so'zlar"
                         onChange={(val)=>{setTags(val)}}
                         options={[]}
                     />
@@ -178,7 +207,7 @@ const Books = () => {
                 </Col>
                 <Col lg={12} md={24} sm={24} xs={24}>
                     <p>Rasm</p>
-                    <input type="file" name="" id="" onChange={(e) => {formData.append('preview_pic', e.target.files[0]); console.log(e);}} />
+                    <input type="file" name="" id="" onChange={handleChange} />
                 </Col>
                 <Col lg={12} md={24} sm={24} xs={24}>
                     <p>Fayl</p>

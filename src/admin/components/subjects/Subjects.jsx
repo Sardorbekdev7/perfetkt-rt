@@ -30,10 +30,11 @@ const Subjects = () => {
     const token = cookies.get('token')
 
     const postSubject = () => {
+        console.log(selected)
         axios.post(`${api}/admin/add-subject`, {
             subject_name: name,
             short_name: shortname,
-            teacher: selected
+            teachers: selected
         }, {
             headers: {
               'x-auth-token-admin': `${token}`
@@ -103,6 +104,7 @@ const Subjects = () => {
 
     }
     const postData = () => {
+        console.log(selected)
         postSubject()
         setOpen(false)
         setName('')

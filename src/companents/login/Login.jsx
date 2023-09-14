@@ -12,7 +12,7 @@ const Login = () => {
   const cookies = new Cookies()
 
   const LoginAdmin = () => {
-    axios.post(`${api}/auth/signin/admin`, {username, password}).then((res) => {
+    axios.post(`${api}/auth/signin/`, {username, password}).then((res) => {
       cookies.set('token', res.data.token)
       console.log(res);
     })

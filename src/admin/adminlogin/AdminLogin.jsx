@@ -17,9 +17,6 @@ const AdminLogin = () => {
     })
   }
 
-
- 
-
   return (
     <div className='login'>
       <h1>Kirish</h1>
