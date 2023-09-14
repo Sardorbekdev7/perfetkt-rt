@@ -26,15 +26,7 @@ const Subjects = () => {
     const [open,setOpen] = useState(false)
     const [resources,setResources] = useState([])
     const token = cookies.get("token")
-    const deleteResource = (id)=>{
-        axios.delete(`${api}/subjects/delete-resource/${id}`,{
-            headers: {
-                "x-auth-token": token
-            }
-        }).then(res=>{
-            
-        })
-    }
+    
     const getSubjects = ()=>{
         axios.get(`${api}/subjects/me`,{
             headers: {
@@ -50,6 +42,17 @@ const Subjects = () => {
             })
             setSubOptions(options);
         })
+    }
+
+    const deleteResource = (id)=>{
+        axios.delete(`${api}/subjects/delete-resource/${id}`,{
+            headers: {
+                "x-auth-token": token
+            }
+        }).then(res=>{
+            
+        })
+        getSubjects()
     }
     const addResource = ()=>{
         axios.post(`${api}/subjects/add-resource`,{
@@ -69,7 +72,7 @@ const Subjects = () => {
     }
     useEffect(()=>{
         getSubjects()
-    },[]);
+    }, [open]);
     return (
         <>
         <Row>

@@ -56,3 +56,7 @@ th, td {
 .ant-layout-sider-collapsed svg {
   left: -5px;
 }
+
+.ant-col {
+  padding: 5px;
+}

@@ -98,15 +98,14 @@ const Profile = () => {
   return (
     <div>
       <div>
-        <h2>Foydalanuvchi xolati: {teacher.isActive?"Active":"Active emas"}</h2>
-        
+        <h2 style={{marginBottom: '20px'}}>Foydalanuvchi holati: {teacher.isActive?"Active":"Active emas"}</h2>
       <Modal
-      title="Profil rasmini tahrirlash"
-      centered
-      open={openPhoto}
-      onOk={() =>{ updatePhoto(); setOpenPhoto(false) }}
-      onCancel={() => setOpenPhoto(false)}
-      width={1000}>
+        title="Profil rasmini tahrirlash"
+        centered
+        open={openPhoto}
+        onOk={() =>{ updatePhoto(); setOpenPhoto(false) }}
+        onCancel={() => setOpenPhoto(false)}
+        width={1000}>
         <Row>
         <Col g={12} md={24} sm={24} xs={24}>
                 <p>Profil rasmi</p>
@@ -114,12 +113,17 @@ const Profile = () => {
         </Col>
         </Row>
       </Modal>
-      <div>
-       F.I.O: {teacher.full_name} - <Button onClick={()=>{setOpenProfile(true)}}>Tahrirlash</Button>
+      <div style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between'}}>
+       <p>F.I.O: {teacher.full_name} - </p> 
+       <Button onClick={()=>{setOpenProfile(true)}}>Tahrirlash</Button>
       </div>
-      <div>
-      <Image width={200} src={teacher.profile_pic?teacher.profile_pic:"https://cdn-icons-png.flaticon.com/512/149/149071.png"}/> <br />
-      <Button onClick={()=>{setOpenPhoto(true)}}>Rasmni tahrirlash</Button>
+      <div style={{marginBottom: '20px'}}>
+        <div style={{textAlign: 'center'}}>
+          <Image width={200} src={teacher.profile_pic?teacher.profile_pic:"https://cdn-icons-png.flaticon.com/512/149/149071.png"}/> <br />
+        </div>
+        <div style={{textAlign: 'right'}} >
+          <Button onClick={()=>{setOpenPhoto(true)}}>Rasmni tahrirlash</Button>
+        </div>
       </div>
       <Modal
        title="Ismni tahrirlash"
@@ -129,23 +133,23 @@ const Profile = () => {
        onCancel={() => setOpenProfile(false)}
        width={1000}>
       <Row>
-            <Col g={12} md={24} sm={24} xs={24}>
+            <Col lg={12} md={24} sm={24} xs={24}>
                 <p>Familyangiz:</p>
                 <Input placeholder="Familyasi" onChange={(e) => setLastName(e.target.value)} value={lastName} />
             </Col>
-            <Col g={12} md={24} sm={24} xs={24}>
+            <Col lg={12} md={24} sm={24} xs={24}>
                 <p>Ismingiz:</p>
                 <Input  placeholder="Ismingiz" onChange={(e) => setFirstName(e.target.value)} value={firstName} />
             </Col>
-            <Col g={12} md={24} sm={24} xs={24}>
+            <Col lg={12} md={24} sm={24} xs={24}>
                 <p>Sharifingiz:</p>
                 <Input  placeholder="Otasining ismi" onChange={(e) => setFatherName(e.target.value)} value={fatherName} />
             </Col>
-            <Col g={12} md={24} sm={24} xs={24}>
+            <Col lg={12} md={24} sm={24} xs={24}>
                 <p>Sharifingiz:</p>
                 <Input  placeholder="Email kiriting..." onChange={(e) => setEmail(e.target.value)} value={email} />
             </Col>
-            <Col g={12} md={24} sm={24} xs={24}>
+            <Col lg={12} md={24} sm={24} xs={24}>
                 <p>Sharifingiz:</p>
                 <Input  placeholder="Telefon raqam" onChange={(e) => setPhoneNumber(e.target.value)} value={phoneNumber} />
             </Col>
@@ -155,8 +159,8 @@ const Profile = () => {
       <div>
       <h2>O'qish va ish faoliyatini yangilash</h2>
       <Row>
-            <Col g={12} md={24} sm={24} xs={24}>
-                <p>O'qish korierangiz: {studyCareer.length}</p>
+            <Col lg={12} md={24} sm={24} xs={24}>
+                <p>O'qish korierangiz</p>
                 <ul>
                   {studyCareer.length?studyCareer.map((item,key)=>(
                     <li>{item.name} - <Button onClick={()=>{deleteStudyC(key)}}>Delete</Button></li>
@@ -164,12 +168,12 @@ const Profile = () => {
                 </ul>
                 <br />
                 <Input placeholder="O'quv muassasi va turini kiriting" onChange={(e) => setNameC(e.target.value)} value={nameC} />
-                <Input placeholder="Nomi" type='Date' onChange={(e) => setStartT(e.target.value)} value={startT} />
-                <Input placeholder="Nomi" type='Date' onChange={(e) => setEndT(e.target.value)} value={endT} />
+                <Input style={{margin: '5px 0'}} placeholder="Nomi" type='Date' onChange={(e) => setStartT(e.target.value)} value={startT} />
+                <Input style={{margin: '5px 0'}}  placeholder="Nomi" type='Date' onChange={(e) => setEndT(e.target.value)} value={endT} />
                 <Button onClick={AddSC}>Add</Button>
             </Col>
-            <Col g={12} md={24} sm={24} xs={24}>
-                <p>Ish korierangiz: {workCareer.length}</p>
+            <Col lg={12} md={24} sm={24} xs={24}>
+                <p>Ish korierangiz</p>
                 <ul>
                   {workCareer.length?workCareer.map((item,key)=>(
                     <li>{item.name} - <Button onClick={()=>{deleteWorkC(key)}}>Delete</Button></li>
@@ -177,11 +181,11 @@ const Profile = () => {
                 </ul>
                 <br />
                 <Input placeholder="Ish joyi va lavozimini kiriting" onChange={(e) => setNameWC(e.target.value)} value={nameWC} />
-                <Input placeholder="Nomi" type='Date' onChange={(e) => setStartWT(e.target.value)} value={startWT} />
-                <Input placeholder="Nomi" type='Date' onChange={(e) => setEndWT(e.target.value)} value={endWT} />
+                <Input  style={{margin: '5px 0'}} placeholder="Nomi" type='Date' onChange={(e) => setStartWT(e.target.value)} value={startWT} />
+                <Input style={{margin: '5px 0'}}  placeholder="Nomi" type='Date' onChange={(e) => setEndWT(e.target.value)} value={endWT} />
                 <Button onClick={AddWC}>Add</Button>
             </Col>
-            <Col g={12} md={24} sm={24} xs={24}>
+            <Col lg={24} md={24} sm={24} xs={24} style={{textAlign: 'right'}} >
                 <Button onClick={(e)=>{updateCareer()}} type="primary">Jo'natish</Button>
             </Col>
       </Row>

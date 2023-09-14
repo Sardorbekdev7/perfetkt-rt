@@ -77,10 +77,6 @@ const TeacherAdmin = () => {
                 <PiChalkboardTeacher />
                 <Link to="articles">Maqolalar</Link>
             </Menu.Item>
-            <Menu.Item key="6">
-                <PiChalkboardTeacher />
-                <Link to="resources">Resurslar</Link>
-            </Menu.Item>
         </Menu>
       </Sider>
       <Layout>
@@ -115,7 +111,6 @@ const TeacherAdmin = () => {
             <Route path={'profile'} element={<Profile />} />
             <Route path={'books'} element={<Books />} />
             <Route path={'articles'} element={<Articles />} />
-            <Route path={'resources'} element={<Resources />} />
             <Route path={'subjects'} element={<Subjects />} />
            </Routes>                                          
         </Content>
