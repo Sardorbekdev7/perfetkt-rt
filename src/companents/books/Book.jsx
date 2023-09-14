@@ -5,18 +5,32 @@ import search from '../../assets/search/search.svg';
 import filterimg from '../../assets/search/filter.svg';
 import book from '../../assets/books/book.svg';
 import Filter from '../filter/Filter';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Footer from '../footer/Footer';
 import Navbar from '../navbar/Navbar';
+import { api } from '../../helps/api';
+import axios from 'axios';
 
 
 const Books = () => {
   const [filter, setFilter] = useState(false)
+  const [books, setBooks] = useState([])
+
+  const getBooks = () => {
+    axios.get(`${api}/books/all`).then((res) => {
+      setBooks(res.data)
+      console.log(res.data);
+    })
+  }
 
   const handleClickOpen = () => {
     setFilter(!filter)
   }
+
+  useEffect(() => {
+    getBooks()
+  }, [])
 
 
   return (
@@ -33,104 +47,24 @@ const Books = () => {
       </div>
       {filter && <Filter />}      
       <Row>
-        <Col lg={6} md={12} sm={24} xs={24} >
-          <Link to={`/books/sardorbekkkk`}>
-            <div className='book-card'>
-              <div className='book-card-img'>
-                <img src={book} alt='book-img' />
-              </div>
-              <div className='book-card-text'>
-                <h1>Dasturlash 1</h1>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus, quasi.</p>
-                <span>Muallif: Sardorbek Najmiddinov</span>
-              </div>
-            </div>
-          </Link>
-        </Col>
-        <Col lg={6} md={12} sm={24} xs={24} >
-          <div className='book-card'>
-            <div className='book-card-img'>
-              <img src={book} alt='book-img' />
-            </div>
-            <div className='book-card-text'>
-              <h1>Dasturlash 1</h1>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus, quasi.</p>
-              <span>Muallif: Sardorbek Najmiddinov</span>
-            </div>
-          </div>
-        </Col>
-        <Col lg={6} md={12} sm={24} xs={24} >
-          <div className='book-card'>
-            <div className='book-card-img'>
-              <img src={book} alt='book-img' />
-            </div>
-            <div className='book-card-text'>
-              <h1>Dasturlash 1</h1>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus, quasi.</p>
-              <span>Muallif: Sardorbek Najmiddinov</span>
-            </div>
-          </div>
-        </Col>
-        <Col lg={6} md={12} sm={24} xs={24} >
-          <div className='book-card'>
-            <div className='book-card-img'>
-              <img src={book} alt='book-img' />
-            </div>
-            <div className='book-card-text'>
-              <h1>Dasturlash 1</h1>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus, quasi.</p>
-              <span>Muallif: Sardorbek Najmiddinov</span>
-            </div>
-          </div>
-        </Col>
-        <Col lg={6} md={12} sm={24} xs={24} >
-          <div className='book-card'>
-            <div className='book-card-img'>
-              <img src={book} alt='book-img' />
-            </div>
-            <div className='book-card-text'>
-              <h1>Dasturlash 1</h1>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus, quasi.</p>
-              <span>Muallif: Sardorbek Najmiddinov</span>
-            </div>
-          </div>
-        </Col>
-        <Col lg={6} md={12} sm={24} xs={24} >
-          <div className='book-card'>
-            <div className='book-card-img'>
-              <img src={book} alt='book-img' />
-            </div>
-            <div className='book-card-text'>
-              <h1>Dasturlash 1</h1>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus, quasi.</p>
-              <span>Muallif: Sardorbek Najmiddinov</span>
-            </div>
-          </div>
-        </Col>
-        <Col lg={6} md={12} sm={24} xs={24} >
-          <div className='book-card'>
-            <div className='book-card-img'>
-              <img src={book} alt='book-img' />
-            </div>
-            <div className='book-card-text'>
-              <h1>Dasturlash 1</h1>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus, quasi.</p>
-              <span>Muallif: Sardorbek Najmiddinov</span>
-            </div>
-          </div>
-        </Col>
-        <Col lg={6} md={12} sm={24} xs={24} >
-          <div className='book-card'>
-            <div className='book-card-img'>
-              <img src={book} alt='book-img' />
-            </div>
-            <div className='book-card-text'>
-              <h1>Dasturlash 1</h1>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus, quasi.</p>
-              <span>Muallif: Sardorbek Najmiddinov</span>
-            </div>
-          </div>
-        </Col>
+      {books.length !=0 ? books.map((res, key) => (
+            <Col key={key} lg={6} md={12} sm={24} xs={24} >
+              <Link to={`/books/${res._id}`}>
+                <div className='book-card'>
+                  <div className='book-card-img'>
+                    <img src={res.preview_pic} alt='book-img' />
+                  </div>
+                  <div className='book-card-text'>
+                    <h1>{res.title}</h1>
+                    <p>{res.description}</p>
+                    <span>Mualliflar: {res.authors.map((item, key) => (
+                      <>{`${item.firstName} ${item.lastName}, `}</>
+                    ))} </span>
+                  </div>
+                </div>
+              </Link>
+            </Col>
+          )): <></>}
       </Row>
     </div>
     <Footer />

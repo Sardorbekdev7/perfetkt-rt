@@ -4,11 +4,13 @@ import newsimg from '../../assets/homepage/news.png'
 import date from '../../assets/homepage/date.svg'
 import { Link } from 'react-router-dom';
 import Stat from '../statstic/Stat';
-import { getData } from '../../helps/api';
+import { api, getData } from '../../helps/api';
 import { useAuthStore } from '../../store/auth.store';
 import { useEffect, useState } from 'react';
 import Navbar from '../navbar/Navbar';
 import Footer from '../footer/Footer';
+import axios from 'axios';
+import { Spin } from 'antd';
 
 
 
@@ -20,15 +22,13 @@ const HomePage = () => {
   const getNews = () => {
     getData('news', 'all').then((res) => {
       setNews(res.data)
-      console.log(res.data);
     })
   }
 
+  
+
   useEffect(() => {
     getNews()
-    news.map((item) => {
-      console.log(item);
-    })
   }, [])
   
 
@@ -50,6 +50,8 @@ const HomePage = () => {
     }
   }
   
+
+
   return (
     <>
     <Navbar />
@@ -63,11 +65,11 @@ const HomePage = () => {
           swipeable={false}
           draggable={false}
           containerClass="carousel-container"
-          autoPlay={false}
+          autoPlay={true}
           autoPlaySpeed={2000}
           itemClass="carousel-item-padding-40-px"
           >
-            {news.map((item, key) => (
+            {news.length != 0 ? news.map((item, key) => (
               <div key={key} className='news-card'>
                 <div style={{height: '300px'}} className='news-card-img'>
                   <img src={item.preview_pic} style={{height: '100%', overflow: 'hidden'}}  alt='yangiliklar' />
@@ -84,11 +86,15 @@ const HomePage = () => {
                 </div>
               </div>
 
-            ))}
+            )): 
+            <div style={{textAlign: 'center'}}>
+                <Spin size="large" />
+            </div>
+            }
           </Carousel>
         </div>
       </div>
-      <Stat />
+      <Stat  />
       
     </div>
     <Footer />

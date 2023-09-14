@@ -41,7 +41,7 @@ const ArticlesDetail = () => {
                           <p>{article.description}</p>
                           <div className='book-detail-card-author'>
                                 {article.authors.map((item, key) => (
-                                    <Link to={`/teachers/${item._id}`} style={{display: 'flex', alignItems: 'center'}} >
+                                    <Link key={key} to={`/teachers/${item._id}`} style={{display: 'flex', alignItems: 'center'}} >
                                         <Avatar src={<img src={item.profile_pic} />} />
                                         <span>{`${item.firstName} ${item.lastName}`}</span>
                                     </Link>
