@@ -14,6 +14,7 @@ import Login from './companents/login/Login.jsx'
 import { QueryClientProvider } from 'react-query'
 import TeacherAdmin from './teacher/admin/TeacherAdmin.jsx'
 import AdminLogin from './admin/adminlogin/AdminLogin.jsx'
+import NewsPage from './companents/newspage/NewsPage.jsx'
 
 
 const RautePage = () => {
@@ -26,6 +27,7 @@ const RautePage = () => {
             <Route path='/my/*' element={<TeacherAdmin />} />
             <Route path='/' element={<Homepage />} />
             <Route path='/teachers' element={<Teacher />} />
+            <Route path='/yangiliklar/:_id' element={<NewsPage />} />
             <Route path='/teachers/*' element={<TeacherDetail />} />
             <Route path='/books' element={<Books />} />
             <Route path='/books/*' element={<Book />} />

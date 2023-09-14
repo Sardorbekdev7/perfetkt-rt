@@ -79,7 +79,7 @@ const HomePage = () => {
                   </div>
                   <p>{item.title}</p>
                   <div className='news-card-link'>
-                    <Link to={`/yangiliklar/${item.link}`}>Batafsil</Link>
+                    <Link to={`/yangiliklar/${item._id}`}>Batafsil</Link>
                   </div>
                 </div>
               </div>
