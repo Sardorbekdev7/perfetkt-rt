@@ -19,7 +19,7 @@ const AdminLogin = () => {
       const  data  = res.data.token
                 if (data) {
                     cookies.set('token', res.data.token)
-                    navigate('/my')
+                    navigate('/admin')
                     console.log(res);
                 } 
     }).catch((err) => {

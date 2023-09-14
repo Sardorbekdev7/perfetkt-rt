@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import Stat from '../statstic/Stat';
 import { getData } from '../../helps/api';
 import { useAuthStore } from '../../store/auth.store';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import Navbar from '../navbar/Navbar';
 import Footer from '../footer/Footer';
 
@@ -14,17 +14,21 @@ import Footer from '../footer/Footer';
 
 const HomePage = () => {
 
-  const { news, setNews } = useAuthStore()
+  // const { news, setNews } = useAuthStore()
+  const [news, setNews] = useState([])
 
   const getNews = () => {
     getData('news', 'all').then((res) => {
       setNews(res.data)
-      console.log(res);
+      console.log(res.data);
     })
   }
 
   useEffect(() => {
     getNews()
+    news.map((item) => {
+      console.log(item);
+    })
   }, [])
   
 
@@ -63,21 +67,24 @@ const HomePage = () => {
           autoPlaySpeed={2000}
           itemClass="carousel-item-padding-40-px"
           >
-            <div className='news-card'>
-              <div className='news-card-img'>
-                <img src={newsimg} alt='yangiliklar' />
-              </div>
-              <div className='news-card-text'>
-                <div className='news-card-date'>
-                  <img src={date} alt='date' />
-                  <span>01.01.2023</span>
+            {news.map((item, key) => (
+              <div key={key} className='news-card'>
+                <div style={{height: '300px'}} className='news-card-img'>
+                  <img src={item.preview_pic} style={{height: '100%', overflow: 'hidden'}}  alt='yangiliklar' />
                 </div>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis minus inventore in illum cum debitis consequatur, est distinctio expedita quia.</p>
-                <div className='news-card-link'>
-                  <Link to='/yangiliklar/'>Batafsil</Link>
+                <div className='news-card-text'>
+                  <div className='news-card-date'>
+                    <img src={date} alt='date' />
+                    <span>{item.createdAt}</span>
+                  </div>
+                  <p>{item.title}</p>
+                  <div className='news-card-link'>
+                    <Link to={`/yangiliklar/${item.link}`}>Batafsil</Link>
+                  </div>
                 </div>
               </div>
-            </div>
+
+            ))}
           </Carousel>
         </div>
       </div>
