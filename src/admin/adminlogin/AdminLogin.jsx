@@ -20,7 +20,6 @@ const AdminLogin = () => {
                 if (data) {
                     cookies.set('token', res.data.token)
                     navigate('/admin')
-                    console.log(res);
                 } 
     }).catch((err) => {
       message.error("Bunday foydalanuvchi topilmadi!")

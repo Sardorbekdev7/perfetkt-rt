@@ -12,12 +12,10 @@ pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/$
 const NewsPage = () => {
     const [news, setNews] = useState([])
     let { _id } = useParams();
-    console.log(_id);
 
     const getNews = () => {
         axios.get(`${api}/news/one/${_id}`).then((res)=> {
             setNews(res.data)
-            console.log(res.data);
         })
     }
 

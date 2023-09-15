@@ -16,7 +16,6 @@ const Teacher = () => {
   }
   useEffect(()=>{
     getTeachers();
-    console.log(teachers)
   },[])
   return (
     <>

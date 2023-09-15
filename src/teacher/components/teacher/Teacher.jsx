@@ -20,7 +20,6 @@ const Teachers = () => {
 
     const getSubjects = async () => {
         let response = await axios.get(`${api}/subjects/all`)
-        console.log(response.data)
         let options = []
         response.data.map((item, key) => {
             options.push({label: item.subject_name, value: item._id})
@@ -36,20 +35,19 @@ const Teachers = () => {
             }
         } ).then(res => {
             setTeachers(res.data.passwords)
-            console.log(res.data.passwords)
-            return res.data
         })
     }
     const postTeachers = () => {
-        console.log(selected)
         axios.post(`${api}/admin/add-teacher`, {full_name, username, password, position, subjects: selected} ,{
             headers: {
               'x-auth-token-admin': `${token}`
             }
         } ).then(res => {
-            console.log(res)
-            getTeachers()
+            message.success('Muvaffaqiyatli')
+        }).catch(() => {
+            message.error('Xatolik')
         })
+        getTeachers()
     }
     const deleteTeacher = (id) => {
         axios.delete(`${api}/admin/delete-teacher/${id}`, {
@@ -57,8 +55,11 @@ const Teachers = () => {
               'x-auth-token-admin': `${token}`
             }
         }).then((res) => {
-            setTeachers(res.data.teachers)
+            message.success("Muvaffiqiyatli")
+        }).catch((err) => {
+            message.error("Xatolik")
         })
+        getTeachers()
         
     }
     const postData = () => {
@@ -68,12 +69,12 @@ const Teachers = () => {
     }
     useEffect(() => {
        getTeachers(); 
-    }, [])
+    }, [open])
     return (
         <div className="adminteacher">
             <div style={{display: 'flex', justifyContent: 'space-between', marginBottom: '20px'}} className="teachertitle">
                 <h1>O'qituvchilar</h1>
-                <Button type="primary" onClick={() => { getSubjects(); setOpen(true); console.log(options)}} >O'qituvchi qo'shish</Button>
+                <Button type="primary" onClick={() => { getSubjects(); setOpen(true)}} >O'qituvchi qo'shish</Button>
             </div>
         <div className="teachertable">
         <table style={{width: '100%', border: 'gray 1px solid'}}>

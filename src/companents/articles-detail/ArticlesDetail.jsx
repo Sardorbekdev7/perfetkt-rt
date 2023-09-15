@@ -16,7 +16,6 @@ const ArticlesDetail = () => {
     const getArticle = () => {
         axios.get(`${api}/articles/one/${_id}`).then((res) => {
             setArticle(res.data)
-            console.log(res.data)
         })
     }
 

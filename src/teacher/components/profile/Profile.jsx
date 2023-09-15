@@ -36,12 +36,13 @@ const Profile = () => {
       headers: {
         "x-auth-token": token
       }
-    }).then(res=>{
-      console.log(res)
-    })
+    }).then((res) => {
+      message.success("Muvaffiqiyatli")
+  }).catch((err) => {
+      message.error("Xatolik")
+  })
   }
   const updateCareer = ()=>{
-    console.log(studyCareer)
     axios.put(`${api}/teachers/update_career`,{
       studyCareer: studyCareer,
       workCareer
@@ -49,9 +50,11 @@ const Profile = () => {
       headers: {
         "x-auth-token": token
       }
-    }).then(res=>{
-      console.log(res.data)
-    })
+    }).then((res) => {
+      message.success("Muvaffiqiyatli")
+  }).catch((err) => {
+      message.error("Xatolik")
+  })
   }
   const getTeacher  = ()=>{
     axios.get(`${api}/teachers/me`,{
@@ -74,7 +77,11 @@ const Profile = () => {
       headers: {
         "x-auth-token": token
       }
-    })
+    }).then((res) => {
+      message.success("Muvaffiqiyatli")
+  }).catch((err) => {
+      message.error("Xatolik")
+  })
   }
 
   const AddSC = ()=>{
@@ -93,7 +100,7 @@ const Profile = () => {
   }
   useEffect(()=>{
     getTeacher();
-  },[])
+  }, [])
 
   return (
     <div>

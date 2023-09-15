@@ -13,7 +13,6 @@ const Stat = () => {
 
     const getStat = () => {
         axios.get(`${api}/home`).then(res => {
-          console.log(res.data.statistics);
           setStat(res.data.statistics)
         })
       }
