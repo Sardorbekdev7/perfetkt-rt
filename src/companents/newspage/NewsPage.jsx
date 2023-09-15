@@ -7,7 +7,7 @@ import Footer from '../footer/Footer';
 import Navbar from '../navbar/Navbar';
 import { format } from 'date-fns';
 
-pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
+// pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
 const NewsPage = () => {
     const [news, setNews] = useState([])
@@ -32,14 +32,15 @@ const NewsPage = () => {
     <div className='book'>
         <h1 style={{marginBottom: '20px'}}>{news.title}</h1>
         <p style={{marginBottom: '20px'}}>{news.createdAt}</p>
-        <div id="ResumeContainer">
-        <Document 
+        <div>
+        <iframe src={news.body} style={{width: '100%', height: '70vh'}} />
+        {/* <Document 
           file={news.body}
           onContextMenu={(e) => e.preventDefault()}
           className={"PDFDocument"} 
           >
             <Page className={"PDFPage PDFPageOne"} pageNumber={1} renderTextLayer={false} renderInteractiveForms={false}/>
-        </Document>
+        </Document> */}
         </div>
     </div>
     <Footer />
