@@ -71,8 +71,8 @@ const HomePage = () => {
           >
             {news.length != 0 ? news.map((item, key) => (
               <div key={key} className='news-card'>
-                <div style={{height: '300px'}} className='news-card-img'>
-                  <img src={item.preview_pic} style={{height: '100%', overflow: 'hidden'}}  alt='yangiliklar' />
+                <div className='news-card-img'>
+                  <img src={item.preview_pic} alt='yangiliklar' />
                 </div>
                 <div className='news-card-text'>
                   <div className='news-card-date'>

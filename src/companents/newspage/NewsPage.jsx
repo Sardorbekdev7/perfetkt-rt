@@ -22,6 +22,7 @@ const NewsPage = () => {
     useEffect(() => {
       getNews()
     }, [])
+
     
 
 
@@ -29,14 +30,17 @@ const NewsPage = () => {
     <>
     <Navbar />
     <div className='book'>
-        <h1>{news.title}</h1>
-        {/* <p>{news.createdAt.splice(0, 10)}</p> */}
+        <h1 style={{marginBottom: '20px'}}>{news.title}</h1>
+        <p style={{marginBottom: '20px'}}>{news.createdAt}</p>
+        <div id="ResumeContainer">
         <Document 
-        file={news.body}
-        onContextMenu={(e) => e.preventDefault()}
-        >
-            <Page pageNumber={1} />
+          file={news.body}
+          onContextMenu={(e) => e.preventDefault()}
+          className={"PDFDocument"} 
+          >
+            <Page className={"PDFPage PDFPageOne"} pageNumber={1} renderTextLayer={false} renderInteractiveForms={false}/>
         </Document>
+        </div>
     </div>
     <Footer />
     </>
