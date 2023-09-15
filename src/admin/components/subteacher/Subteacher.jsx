@@ -1,13 +1,7 @@
 import { Button, Col, Input, Modal, Row, Select, Table } from 'antd';
 import { useEffect, useState } from 'react';
-import {
-    QueryClient,
-    QueryClientProvider,
-    useQuery,
-  } from 'react-query';
 import { api } from '../../../helps/api';
 import axios from 'axios';
-import { useAuthStore } from '../../../store/auth.store';
 import Cookies from 'universal-cookie';
 
 
