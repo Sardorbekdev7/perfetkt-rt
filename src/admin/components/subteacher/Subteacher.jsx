@@ -96,6 +96,7 @@ const Subteacher = ()=>{
     useEffect(()=>{
         getTeachers();
     },[])
+
     return(
         <div style={{gap: '10px'}}>
             <h1 style={{marginBottom: '10px'}}>O'qituvchini tanlang</h1>
@@ -190,4 +191,5 @@ const Subteacher = ()=>{
         </div>
     )
 }
+
 export default Subteacher
