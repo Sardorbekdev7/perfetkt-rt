@@ -16,11 +16,11 @@ const Subteacher = ()=>{
     const [subjects,setSubjects] = useState([]);
     const [subject,setSubject] = useState("")
     const [allSubjects,setAllSubjects] = useState([])
-    const addSubject = ()=>{
-        axios.get(`${api}/admin/add_subject/${subject}/${profile._id}`,{
-            headers: {
-                'x-auth-token-admin': `${token}`
-            }
+
+    
+    const getSubjects = ()=>{
+        axios.get(`${api}/subjects/all`).then((res)=>{
+            setAllSubjects(res.data)
         })
     }
     const getTeachers = ()=>{
@@ -37,9 +37,7 @@ const Subteacher = ()=>{
                 })
             })
             setTeachers(options)
-            axios.get(`${api}/subjects/all`).then((res)=>{
-                setAllSubjects(res.data)
-            })
+            getSubjects()
         })
     }
     const getTeacherInfo = (username)=>{
@@ -60,6 +58,16 @@ const Subteacher = ()=>{
             setSubjects(res.data.subjects);
         })
     }
+    const addSubject = ()=>{
+        axios.get(`${api}/admin/add_subject/${subject}/${profile._id}`,{
+            headers: {
+                'x-auth-token-admin': `${token}`
+            }
+        }).then((res) => {
+            getSubjects()
+            getResources()
+        })
+    }
     const deleteBook = (_id)=>{
         axios.delete(`${api}/admin/delete-book/${_id}`,{
             headers: {
@@ -74,6 +82,8 @@ const Subteacher = ()=>{
             headers: {
                 'x-auth-token-admin': `${token}`
             }
+        }).then((res) => {
+            getResources()
         })
     }
     const deleteArticle = (_id)=>{
@@ -112,9 +122,9 @@ const Subteacher = ()=>{
             <Button  type="primary" onClick={() => {setProfile(null);getTeacherInfo(teacher);}} style={{marginBottom: '10px'}} >Ma'lumot</Button>
             <h2>Yuklangan adabiyotlar</h2>
             {profile?
-            <div>
+            <div style={{marginBottom: '20px'}}>
                 <h3>Kitoblar</h3>
-                <div className="books">
+                <div>
                     <ul>
                     {profile.books&&profile.books.length!=0?profile.books.map((item,key)=>(
                         <li key={key}>{item.name} - <Button onClick={()=>{deleteBook(item._id)}}>Delete</Button></li>
@@ -122,7 +132,7 @@ const Subteacher = ()=>{
                     </ul>
                 </div>
                 <h3>Maqolalar</h3>
-                <div className="books">
+                <div>
                 {profile.books&&profile.books.length!=0?profile.articles.map((item,key)=>(
                     <li>{item.title} - <Button onClick={()=>{deleteArticle(item._id)}}>Delete</Button></li>
                 )):<>Maqolalar mavjud emas</>}
@@ -130,7 +140,7 @@ const Subteacher = ()=>{
             </div>
             :<p>Ma'lumot yuklanmoqda</p>}
             <h2>Yuklangan fan resurslari</h2>
-            <table>
+            <table style={{width: '100%', marginBottom: '20px'}}>
                     <thead>
                         <th>№</th>
                         <th>Nomi</th>
@@ -156,7 +166,7 @@ const Subteacher = ()=>{
                 </table>
             <div>
             <h2>Fanlar ro'yxati</h2>
-            <table>
+            <table style={{width: '100%', marginBottom: '20px'}}>
                 <thead>
                 <th>№</th>
                 <th>Nomi</th>
