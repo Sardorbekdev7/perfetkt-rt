@@ -115,11 +115,11 @@ const Subteacher = ()=>{
             <div>
                 <h3>Kitoblar</h3>
                 <div className="books">
-                <ul>
-                {profile.books&&profile.books.length!=0?profile.books.map((item,key)=>(
-                    <li>{item.name} - <Button onClick={()=>{deleteBook(item._id)}}>Delete</Button></li>
-                )):<>Kitoblar mavjud emas</>}
-                </ul>
+                    <ul>
+                    {profile.books&&profile.books.length!=0?profile.books.map((item,key)=>(
+                        <li key={key}>{item.name} - <Button onClick={()=>{deleteBook(item._id)}}>Delete</Button></li>
+                    )):<>Kitoblar mavjud emas</>}
+                    </ul>
                 </div>
                 <h3>Maqolalar</h3>
                 <div className="books">

@@ -37,20 +37,6 @@ const Books = () => {
     formData.append('authors', JSON.stringify(authors))
     formData.append('creationDate', date)
     formData.append('preview_pic',fileIn)
-    const postBooks = () => {
-        axios.post(`${api}/books/add`, formData, {
-            headers: {
-              'x-auth-token': `${token}`,
-              'Accept': 'application/json',
-              'Content-Type': 'multipart/form-data'
-            }
-        } 
-        ).then((res) => {
-            message.success("Kitob muvaffiqiyatli qo'shildi")
-        }).catch((err) => {
-            message.error("Xatolik")
-        })
-    }
     const getAuthors = ()=>{
         axios.get(`${api}/teachers/allIds`).then(res=>{
             let options = []
@@ -67,6 +53,30 @@ const Books = () => {
             }
         }).then((res) => {
             setBook(res.data)
+        })
+    }
+    const postBooks = () => {
+        axios.post(`${api}/books/add`, formData, {
+            headers: {
+              'x-auth-token': `${token}`,
+              'Accept': 'application/json',
+              'Content-Type': 'multipart/form-data'
+            }
+        } 
+        ).then((res) => {
+            message.success("Kitob muvaffiqiyatli qo'shildi")
+            getBooks()
+            setName('')
+            setDate('')
+            setFile('')
+            setFileIn('')
+            setLanguage('')
+            setDesc('')
+            setTags('')
+            setOutAuthors('')
+            setAuthors('')
+        }).catch((err) => {
+            message.error("Xatolik")
         })
     }
 
@@ -155,7 +165,7 @@ const Books = () => {
                 </Col>
                 <Col lg={12} md={24} sm={24} xs={24}>
                     <p>Izoh</p>
-                    <DatePicker onChange={(val)=>{setDate(val)}} />
+                    <DatePicker onChange={(val)=>{setDate(val)}} value={date} />
                 </Col>
                 <Col lg={12} md={24} sm={24} xs={24}>
                     <p>Tili</p>

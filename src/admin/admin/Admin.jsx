@@ -2,8 +2,11 @@ import { useState } from 'react';
 import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
-} from '@ant-design/icons';
+} from '@ant-design/icons'; 
+import {GiBookshelf} from 'react-icons/gi'
 import {FaHome} from 'react-icons/fa'
+import {BiNews} from 'react-icons/bi'
+import {BsPersonVideo3} from 'react-icons/bs'
 import { Layout, Menu, Button, theme } from 'antd';
 import {Link, Navigate, Route, Routes, useLocation} from 'react-router-dom';
 import HomeDash from "../components/home/HomeDash.jsx";
@@ -67,15 +70,15 @@ const Admin = () => {
                   <Link to="teachers">O'qituvchilar</Link>
               </Menu.Item>
               <Menu.Item key="3">
-                  <PiChalkboardTeacher />
+                  <GiBookshelf />
                   <Link to="subjects">Fanlar</Link>
               </Menu.Item>
               <Menu.Item key="4">
-                  <PiChalkboardTeacher />
+                  <BsPersonVideo3 />
                   <Link to="subteacher">Fan va o'qituvchi</Link>
               </Menu.Item>
               <Menu.Item key="5">
-                  <PiChalkboardTeacher />
+                  <BiNews />
                   <Link to="news">Yangiliklar</Link>
               </Menu.Item>
           </Menu>

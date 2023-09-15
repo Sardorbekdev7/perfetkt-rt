@@ -75,7 +75,7 @@ const TeacherDetail = () => {
               <Col lg={12} md={24} sm={24} xs={24}>
                   <div className='teach-info'>
                     <div>
-                      {teacher.studyCareer.length != 0 && 
+                      {teacher.studyCareer.length != 0 ?
                       <>
                       <h1>O'quv faoliyati</h1>
                       <ul>
@@ -84,7 +84,7 @@ const TeacherDetail = () => {
                           ))}
                       </ul>
                       </>
-                      }
+                      : <></>}
                     </div>
                     <div>
                       {teacher.workCareer.length != 0 && <>
