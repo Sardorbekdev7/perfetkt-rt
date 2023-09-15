@@ -14,7 +14,6 @@ const Book = () => {
     const getBook = () => {
         axios.get(`${api}/books/one/${_id}`).then((res) => {
             setBook(res.data)
-            console.log(res.data)
         })
     }
 

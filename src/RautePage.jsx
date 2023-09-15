@@ -28,7 +28,7 @@ const RautePage = () => {
             <Route path='/' element={<Homepage />} />
             <Route path='/teachers' element={<Teacher />} />
             <Route path='/yangiliklar/:_id' element={<NewsPage />} />
-            <Route path='/teachers/*' element={<TeacherDetail />} />
+            <Route path='/teachers/:username' element={<TeacherDetail />} />
             <Route path='/books' element={<Books />} />
             <Route path='/books/:_id' element={<Book />} />
             <Route path='/articles' element={<Articles />} />

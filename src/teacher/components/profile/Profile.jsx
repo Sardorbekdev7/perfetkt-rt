@@ -43,7 +43,6 @@ const Profile = () => {
   })
   }
   const updateCareer = ()=>{
-    console.log(studyCareer)
     axios.put(`${api}/teachers/update_career`,{
       studyCareer: studyCareer,
       workCareer

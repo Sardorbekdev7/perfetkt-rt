@@ -53,7 +53,6 @@ const Books = () => {
     }
     const getAuthors = ()=>{
         axios.get(`${api}/teachers/allIds`).then(res=>{
-            console.log(res.data)
             let options = []
             res.data.teachers.map((item,key)=>{
                 options.push({label: item.full_name, value: item._id})
@@ -68,7 +67,6 @@ const Books = () => {
             }
         }).then((res) => {
             setBook(res.data)
-            console.log(res);
         })
     }
 

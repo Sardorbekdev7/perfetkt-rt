@@ -65,7 +65,6 @@ const Articles = () => {
 
     const getAuthors = ()=>{
         axios.get(`${api}/teachers/allIds`).then(res=>{
-            console.log(res.data)
             let options = []
             res.data.teachers.map((item,key)=>{
                 options.push({label: item.full_name, value: item._id})
@@ -80,7 +79,6 @@ const Articles = () => {
                 "x-auth-token": token,
             }
         }).then((res) => {
-          console.log(res);  
           setArticle(res.data.articles)
             
         })
@@ -92,7 +90,6 @@ const Articles = () => {
                 "x-auth-token": token,
             }
         }).then((res) => {
-            console.log(res);
             getArticles()
             message.success("Maqola muvaffiqiyatli o'chirildi")
         }).catch(() => {

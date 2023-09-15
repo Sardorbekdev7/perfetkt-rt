@@ -22,7 +22,6 @@ const Login = () => {
                 if (data) {
                     cookies.set('token', res.data.token)
                     navigate('/my')
-                    console.log(res);
                 } 
     }).catch((err) => {
       message.error("Bunday foydalanuvchi topilmadi!")

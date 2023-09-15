@@ -47,7 +47,6 @@ const options3 = [
 ];
 
 const onChange = (value) => {
-  console.log(value);
 };
 
 

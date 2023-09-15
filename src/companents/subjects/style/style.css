@@ -4,7 +4,7 @@
     padding: 20px 120px;
     margin-top: 80px;
     flex-direction: column;
-    height: 85vh;
+    min-height: 85vh;
 }
 
 

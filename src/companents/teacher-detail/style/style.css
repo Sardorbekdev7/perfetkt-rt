@@ -18,13 +18,20 @@
     height: 100%;
     display: flex;
     align-items: center;
+    overflow: hidden;
     justify-content: center;
+    padding: 20px;
+}
+
+.teach-img img {
+    width: 100%;
+    height: auto
 }
 
 .teach-info {
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: center;
     height: 100%;
 }
 
@@ -41,13 +48,16 @@
     list-style: none;
 }
 
+.teacherdetail h1 {
+    margin: 20px 0 0 0;
+}
 @media (max-width: 768px) {
     .teach-info {
         margin-top: 20px;
     }
 }
 
-@media (max-width: 428px) {
+@media (max-width:600px) {
     .teacherdetail {
         padding: 5px 40px;
     }

@@ -33,7 +33,6 @@ const Subjects = () => {
                 "x-auth-token": token
             }
         }).then(res=>{
-            console.log(res.data)
             setSubjects(res.data.subjects);
             setResources(res.data.resources)
             let options = [];
