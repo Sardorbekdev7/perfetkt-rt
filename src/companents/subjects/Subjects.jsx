@@ -47,7 +47,7 @@ const Subjects = () => {
                           label: item.subject_name,
                           children: <p>
                             {item.teachers.map((item1, key) => (
-                              <p>{item1.firstName} {item1.lastName}</p>
+                              <p><a href={"/teachers/a-abdusattorov"}>{item1.firstName} {item1.lastName}</a></p>
                             ))}
                           </p>,
                         },

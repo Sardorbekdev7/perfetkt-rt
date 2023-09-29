@@ -59,6 +59,7 @@ const News = ()=>{
 
       const postData = () => {
         setOpen(false)
+        postNews();
         setTitle('')
         setDate('')
         setFile('')
