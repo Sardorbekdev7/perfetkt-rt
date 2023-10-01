@@ -1,13 +1,7 @@
-import { Button, Col, Input, Modal, Row, Select, Table, message } from 'antd';
+import { Button, Col, Input, Modal, Row, Select, message } from 'antd';
 import { useEffect, useState } from 'react';
-import {
-    QueryClient,
-    QueryClientProvider,
-    useQuery,
-  } from 'react-query';
 import { api } from '../../../helps/api';
 import axios from 'axios';
-import { useAuthStore } from '../../../store/auth.store';
 import Cookies from 'universal-cookie';
 
 
@@ -23,13 +17,7 @@ const Subjects = () => {
     const [selected,setSelected] = useState([])
     const [openUpdate,setOpenUpdate] = useState({open: false,id: "",subject_name: "",
     short_name: "",semester: 0})
-    //for theme
-    const [themeName,setThemeName] = useState("");
-    const [themeNum,setThemeNum] = useState(0);
     const [semester,setSemester] = useState(1);
-    const [themeOptions,setThemeOptions] = useState([])
-    const [selectedSubject,setselectedSubject] = useState("")
-    const [openTheme, setOpenTheme] = useState(false);
     const token = cookies.get('token')
 
     const postSubject = () => {
@@ -50,24 +38,6 @@ const Subjects = () => {
         })
     }
 
-    const postSubjectTheme = () => {
-        axios.post(`${api}/admin/add-theme`, {
-            name: themeName,
-            themeNum,
-            subject_id: selectedSubject
-        }, {
-            headers: {
-              'x-auth-token-admin': `${token}`
-            }
-        }).then((res) => {
-            if(res.status==201) message.success("Mavzu muvaffaqiyatli yaratildi!");
-            getSubjects()
-        }).catch(err=>{
-            console.log(err);
-            message.error("Mavzu yaratishda xatolik yuzaga keldi. Ma'lumot to'g'ri kiritilganini tekshiring va qayta urinib ko'ring yoki adminga murojaat qiling")
-        })
-    }
-    
     const getTeachers = () =>{
         axios.get(`${api}/admin/home`,{
             headers: {
@@ -114,20 +84,14 @@ const Subjects = () => {
                     value: item._id
                 })
             })
-            setThemeOptions(options)
             setSub(response.data)
             return response.data
         }).catch(error=>{
+            console.log(error)
             message.error("Fanlarni yuklashda xatolik yuzaga keldi...")
         })
     }
-    const postDataTheme = () =>{
-        postSubjectTheme();
-        setOpenTheme(false);
-        setThemeName("");
-        setThemeNum(0)
 
-    }
     const postData = () => {
         postSubject()
         setOpen(false)
@@ -139,10 +103,6 @@ const Subjects = () => {
       getSubjects();
       getTeachers()
     }, [])
-    
-
-     
-    
     return (
         <div className="adminteacher">
             <div style={{display: 'flex', justifyContent: 'space-between', marginBottom: '20px'}} className="teachertitle">
@@ -193,7 +153,7 @@ const Subjects = () => {
                 <Input placeholder="Fanning qisqa nomi"  onChange={(e) => setShortname(e.target.value)} value={shortname} />
             </Col>
             <Col lg={12} md={24} sm={24} xs={24}>
-                <p>Qisqa nomi</p>
+                <p>Semester </p>
                 <Input type='number' placeholder="Semester(1-8)"  onChange={(e) => setSemester(e.target.value)} value={semester} />
             </Col>
             <Col lg={12} md={24} sm={24} xs={24}>
@@ -236,42 +196,7 @@ const Subjects = () => {
         </Row>
         
         </Modal>
-        
-        <div style={{display: 'flex', justifyContent: 'space-between', marginBottom: '20px', marginTop: "40px"}} className="themettle">
-                <h1>Mavzular ro'yxati</h1>
-                <Button type="primary" onClick={() => {getTeachers();setOpenTheme(true)}} >Yangi mavzu qo'shish</Button>
-            </div>   
-        <Modal
-        title="Mavzu qo'shish"
-        centered
-        open={openTheme}
-        onOk={() => postDataTheme()}
-        onCancel={() => setOpenTheme(false)}
-        width={1000}
-      >
-        <Row>
-            <Col lg={12} md={24} sm={24} xs={24}>
-                <p>Mavzu nomi</p>
-                <Input placeholder="Mavzu nomi" onChange={(e) => setThemeName(e.target.value)} value={themeName} />
-            </Col>
-            <Col lg={12} md={24} sm={24} xs={24}>
-                <p>Qisqa nomi</p>
-                <Input placeholder="Mavzu tartibi"  type='number' onChange={(e) => setThemeNum(e.target.value)} value={themeNum} />
-            </Col>
-            <Col lg={12} md={24} sm={24} xs={24}>
-                <p>Fanni tanlash</p>
-                <Select
-                    allowClear
-                    style={{
-                        width: '100%',
-                    }}
-                    placeholder="Fanni tanlang"
-                    options={themeOptions}
-                    onChange={(val)=>{setselectedSubject(val)}}
-                    />
-            </Col> 
-        </Row>
-        </Modal>    
+    
         </div>
         
         
