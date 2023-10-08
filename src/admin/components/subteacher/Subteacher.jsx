@@ -51,6 +51,7 @@ const Subteacher = () => {
   const [open, setOpen] = useState(false);
   const [newReq, setNewReq] = useState({ id: null, req: 0,done: 0 });
   const [reqlist,SetReqList] = useState([])
+  const [dones,setDones] = useState([])
   const getSubjects = () => {
     axios.get(`${api}/subjects/all`).then((res) => {
       setAllSubjects(res.data);
@@ -106,7 +107,8 @@ const Subteacher = () => {
         },
       })
       .then((res) => {
-        setRequirements(res.data);
+        setRequirements(res.data.requirements);
+        setDones(res.data.dones);
       });
   };
   const addSubject = () => {
@@ -427,6 +429,13 @@ const Subteacher = () => {
         ) : (
           "Statistika mavjud emas"
         )}
+        
+      </div>
+      <div>
+        <h1>Majburiyatlar uchun yuklangan fayllar</h1>
+      {dones?dones.map((val,index)=>(
+        <li><a href={val.link}>{val.link}</a> - {val.require.name}</li>
+      )):<h3>Majburiyatlar bo'yicha yuklangan fayl yo'q</h3>}
       </div>
     </div>
   );

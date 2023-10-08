@@ -19,7 +19,7 @@ const Presentation = () => {
     <>
     <Navbar />
     <div className='books'>
-      <h1>Raqamli texnologiyalar kafedrasi professor va o’qituvchilar tomonidan yozilgan maqolalar</h1>
+      <h1>Raqamli texnologiyalar kafedrasi professor va o’qituvchilar tomonidan tayyorlangan taqdimotlar</h1>
       <div className='search'>
         <input type="text" placeholder='Kitob nomini yozing...' />
         <div className='search-filter'>

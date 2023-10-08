@@ -16,8 +16,7 @@ const cookies = new Cookies()
 const Subjects = () => {
     const [subjects,setSubjects] = useState([]);
     const [subOptions,setSubOptions] = useState([]);
-    const [themeOptions,setThemeOptions] = useState([]);
-    const [themeId,setThemeId] = useState("");
+    const [theme,setTheme] = useState("");
     const [resource_name,setResourceName] = useState("");
     const [link,setResourceLink] = useState("");
     const [subject_type,setSubjectType] = useState("");
@@ -58,12 +57,12 @@ const Subjects = () => {
 
     const addResource = ()=>{
         axios.post(`${api}/subjects/add-resource`,{
-            theme_id: themeId,
             name: resource_name,
             link,
             resource_type,
             subject_type,
-            subject_id
+            subject_id,
+            theme
         },{
             headers: {
                 "x-auth-token": token
@@ -93,13 +92,7 @@ const Subjects = () => {
                 width: "100%"
             }}
             onChange={(val)=>{
-                let [subject] = subjects.filter((e)=>e._id==val)
-                let theme = []
                 setSubjectId(val)
-                subject.themes.map((item)=>{
-                    theme.push({label: item.name,value: item._id})
-                })
-                setThemeOptions(theme)
             }}
             title='Subject'
         />
@@ -108,21 +101,12 @@ const Subjects = () => {
             marginTop: "10px"
         }} lg={12} md={24} sm={24}>
             <h4>Mavzular: </h4>
-            <Select
-            placeholder="Fan mavzusini tanlang"
-            options={themeOptions}
-            style={{
-                width: "100%"
-            }}
-            onChange={(val)=>{
-                setThemeId(val);
-            }} 
-        />
+            <Input value={theme} onChange={(e)=>setTheme(e.target.value)}/>
         </Col>
         <Col style={{
             marginTop: "10px"
         }} lg={12} md={24} sm={24}>
-            <Button disabled={!themeId.length} type='primary' onClick={()=>{setOpen(true)}}>Resurs qo'shish</Button>
+            <Button  type='primary' onClick={()=>{setOpen(true)}}>Resurs qo'shish</Button>
         </Col>
         </Row>
         <Row style={{
@@ -145,7 +129,7 @@ const Subjects = () => {
                         <tr>
                             <td>{key+1}</td>
                             <td>{item.name}</td>
-                            <td>{item.theme.name}</td>
+                            <td>{item.theme}</td>
                             <td>{item.subject.subject_name}</td>
                             <td>{item.subject_type}</td>
                             <td>{item.resource_type}</td>
